@@ -9,25 +9,23 @@ import Footer from '@/components/organisms/footer'
 export const Route = createFileRoute('/')({ component: LandingPage })
 
 function LandingPage() {
-
-
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-200">
+    <div className="min-h-screen bg-background">
       <Header />
       {/* Hero Section */}
-     <Hero />
+      <Hero />
 
       {/* Stats Section */}
-    <Stats />
+      <Stats />
 
       {/* Features Grid */}
       <FeatureGrid />
 
       {/* CTA Section */}
-     <Cta />
+      <Cta />
 
       {/* Footer */}
-     <Footer />
+      <Footer />
     </div>
   )
 }

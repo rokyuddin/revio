@@ -7,6 +7,7 @@ import {
   LayoutDashboard,
   Sparkles
 } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -18,59 +19,68 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 w-full z-40 bg-slate-900/80 backdrop-blur-md border-b border-slate-800/50 text-white shadow-lg px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => setIsOpen(true)}
-            className="lg:hidden p-2 hover:bg-slate-800 rounded-lg transition-colors"
-            aria-label="Open menu"
-          >
-            <Menu size={24} />
-          </button>
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-linear-to-br from-cyan-400 to-blue-600 flex items-center justify-center font-bold text-white text-sm">R</div>
-            <span className="text-xl font-bold tracking-tight">Revio</span>
-          </Link>
-        </div>
-
-        <nav className="hidden lg:flex items-center gap-6">
-          {navItems.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="text-slate-400 hover:text-white font-medium transition-colors"
-              activeProps={{ className: 'text-cyan-400' }}
+      <header className="fixed top-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-sm border-b border-border/50 text-foreground">
+        <div className="max-w-7xl mx-auto w-full px-2 sm:px-0 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setIsOpen(true)}
+              className="lg:hidden p-2 hover:bg-accent/50 rounded-xl transition-colors"
+              aria-label="Open menu"
             >
-              {item.label}
+              <Menu size={24} className="text-foreground" />
+            </button>
+            <Link to="/" className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center font-black text-white">
+                <Sparkles className="w-5 h-5" />
+              </div>
+              <span className="text-xl font-black tracking-tight hidden sm:block bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">Revio</span>
             </Link>
-          ))}
-          <Link
-            to="/dashboard"
-            className="px-5 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl text-sm font-bold shadow-lg shadow-cyan-600/20 transition-all flex items-center gap-2"
-          >
-            <Sparkles size={16} />
-            Launch App
-          </Link>
-        </nav>
+          </div>
+
+          <nav className="hidden lg:flex items-center gap-6">
+            {navItems.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="text-muted-foreground hover:text-foreground font-bold transition-colors px-4 py-2 rounded-lg hover:bg-accent/50"
+                activeProps={{ className: 'text-emerald-600 font-black bg-emerald-50/50' }}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Button 
+              asChild 
+              size="default"
+              className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/95 hover:to-primary/85 shadow-[0_4px_16px_rgba(99,102,241,0.2)] hover:shadow-[0_6px_24px_rgba(99,102,241,0.3)]"
+            >
+              <Link to="/dashboard" className="flex items-center gap-2">
+                <Sparkles size={16} />
+                Launch App
+              </Link>
+            </Button>
+          </nav>
+        </div>
       </header>
 
       {/* Mobile Drawer */}
       <aside
-        className={`fixed top-0 left-0 h-full w-72 bg-slate-950 text-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
+        className={`fixed top-0 left-0 h-full w-72 bg-white text-foreground z-50 transform transition-transform duration-300 ease-in-out flex flex-col border-r border-border/50 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="flex items-center justify-between p-6 border-b border-slate-800">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-linear-to-br from-cyan-400 to-blue-600 flex items-center justify-center font-bold text-white text-sm">R</div>
-            <span className="text-xl font-bold">Revio</span>
+        <div className="flex items-center justify-between p-6 border-b border-border/50">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center font-black text-white">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <span className="text-xl font-black bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">Revio</span>
           </div>
           <button
             onClick={() => setIsOpen(false)}
-            className="p-2 hover:bg-slate-900 rounded-lg transition-colors"
+            className="p-2 hover:bg-accent/50 rounded-xl transition-colors"
             aria-label="Close menu"
           >
-            <X size={24} />
+            <X size={24} className="text-foreground" />
           </button>
         </div>
 
@@ -80,20 +90,33 @@ export default function Header() {
               key={item.to}
               to={item.to}
               onClick={() => setIsOpen(false)}
-              className="flex items-center gap-3 p-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 transition-all mb-1"
+              className="flex items-center gap-3 p-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-all mb-1 font-bold"
               activeProps={{
-                className: 'flex items-center gap-3 p-3 rounded-xl bg-cyan-500/10 text-cyan-400 shadow-sm transition-all mb-1',
+                className: 'flex items-center gap-3 p-3 rounded-xl bg-emerald-50/50 text-emerald-600 font-black transition-all mb-1',
               }}
             >
               <item.icon size={20} />
-              <span className="font-semibold">{item.label}</span>
+              <span>{item.label}</span>
             </Link>
           ))}
         </nav>
+
+        <div className="p-6 border-t border-border/50">
+          <Button 
+            asChild 
+            size="default" 
+            className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/95 hover:to-primary/85 shadow-[0_4px_16px_rgba(99,102,241,0.2)] hover:shadow-[0_6px_24px_rgba(99,102,241,0.3)]"
+          >
+            <Link to="/dashboard" className="flex items-center gap-2 justify-center">
+              <Sparkles size={16} />
+              Launch App
+            </Link>
+          </Button>
+        </div>
       </aside>
 
       {/* Spacer to prevent content overlap */}
-      <div className="h-[72px]" />
+      <div className="h-[72px]"></div>
     </>
   )
 }
